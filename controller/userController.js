@@ -2,6 +2,9 @@ const usermodel = require('../model/userSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 module.exports = {
+  newperson2: async (req, res) => {
+    res.json({ message: 'person information is added' });
+  },
   newperson: async (req, res) => {
     const {
       Firstname,
