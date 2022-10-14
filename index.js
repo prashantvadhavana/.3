@@ -1,14 +1,13 @@
+
 const express = require('express');
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-
-server.listen(4000, () => {
-  console.log('listening on *:3000');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+require('./confiure/db');
+const mainRouter = require('./router/index');
+const billingRouter=require("./router/BillingRouter")
+app.use('/api', mainRouter);
+app.use("/api",billingRouter)
+app.listen(4000, () => {
+  console.log('server is connected');
 });
